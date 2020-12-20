@@ -27,12 +27,14 @@ class Exp(Function):
         return np.exp(x)
 
 
-A = Square()
-B = Exp()
-C = Square()
+    
+if __name__ == "__main__":    
+    A = Square()
+    B = Exp()
+    C = Square()
 
-x = Variable(np.array(0.5))
-a = A(x)
-b = B(a)
-y = C(b)
-print(y.data)
+    x = Variable(np.array(0.5))
+    a = A(x)
+    b = B(a)
+    y = C(b)
+    print(y.data) # 1.648721270700128 = exp(0.5 ** 2) ** 2
