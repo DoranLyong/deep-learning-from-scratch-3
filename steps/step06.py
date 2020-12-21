@@ -3,8 +3,8 @@ import numpy as np
 
 class Variable:
     def __init__(self, data):
-        self.data = data
-        self.grad = None
+        self.data = data  
+        self.grad = None  
 
 
 class Function:
@@ -12,7 +12,7 @@ class Function:
         x = input.data
         y = self.forward(x)
         output = Variable(y)
-        self.input = input
+        self.input = input   # 순전파 입력 값 저장(역전파 때 활용)
         return output
 
     def forward(self, x):
@@ -43,18 +43,20 @@ class Exp(Function):
         gx = np.exp(x) * gy
         return gx
 
+if __name__ == "__main__":
+    
 
-A = Square()
-B = Exp()
-C = Square()
+    A = Square()
+    B = Exp()
+    C = Square()
 
-x = Variable(np.array(0.5))
-a = A(x)
-b = B(a)
-y = C(b)
+    x = Variable(np.array(0.5))
+    a = A(x)
+    b = B(a)
+    y = C(b)
 
-y.grad = np.array(1.0)
-b.grad = C.backward(y.grad)
-a.grad = B.backward(b.grad)
-x.grad = A.backward(a.grad)
-print(x.grad)
+    y.grad = np.array(1.0)
+    b.grad = C.backward(y.grad)
+    a.grad = B.backward(b.grad)
+    x.grad = A.backward(a.grad)
+    print(x.grad) # 3.297442541400256
