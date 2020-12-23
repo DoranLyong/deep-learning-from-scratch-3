@@ -3,8 +3,8 @@ import numpy as np
 
 class Variable:
     def __init__(self, data):
-        self.data = data  
-        self.grad = None  
+        self.data = data  # 순전파 입력 데이터 
+        self.grad = None  # 역전파 기울기 데이터 
 
 
 class Function:

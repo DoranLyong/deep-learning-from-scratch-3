@@ -13,12 +13,12 @@ class Variable:
     def backward(self):
         funcs = [self.creator]
         while funcs:
-            f = funcs.pop()  # 1. Get a function
+            f = funcs.pop()  # 1. Get a function 
             x, y = f.input, f.output  # 2. Get the function's input/output
             x.grad = f.backward(y.grad)  # 3. Call the function's backward
 
             if x.creator is not None:
-                funcs.append(x.creator)
+                funcs.append(x.creator) # 하나 앞의 함수(입력 방향)를 리스트에 추가한다. 
 
 
 class Function:
@@ -60,16 +60,19 @@ class Exp(Function):
         return gx
 
 
-A = Square()
-B = Exp()
-C = Square()
+if __name__ == "__main__":     
+    
+    
+    A = Square()
+    B = Exp()
+    C = Square()
 
-x = Variable(np.array(0.5))
-a = A(x)
-b = B(a)
-y = C(b)
+    x = Variable(np.array(0.5))
+    a = A(x)
+    b = B(a)
+    y = C(b)
 
-# backward
-y.grad = np.array(1.0)
-y.backward()
-print(x.grad)
+    # backward
+    y.grad = np.array(1.0)
+    y.backward()
+    print(x.grad) # 3.297442541400256
