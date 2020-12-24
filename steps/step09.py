@@ -5,7 +5,7 @@ class Variable:
     def __init__(self, data):
         if data is not None:
             if not isinstance(data, np.ndarray):
-                raise TypeError('{} is not supported'.format(type(data)))
+                raise TypeError(f'{type(data)} is not supported')
 
         self.data = data
         self.grad = None
@@ -38,7 +38,7 @@ class Function:
     def __call__(self, input):
         x = input.data
         y = self.forward(x)
-        output = Variable(as_array(y))
+        output = Variable( as_array(y) )
         output.set_creator(self)
         self.input = input
         self.output = output
@@ -81,12 +81,14 @@ def exp(x):
     return Exp()(x)
 
 
-x = Variable(np.array(0.5))
-y = square(exp(square(x)))
-y.backward()
-print(x.grad)
+if __name__ == "__main__": 
+
+    x = Variable(np.array(0.5))
+    y = square(exp(square(x)))  # 합성함수: 연속해서 적용 
+    y.backward()
+    print(x.grad) # 3.297442541400256
 
 
-x = Variable(np.array(1.0))  # OK
-x = Variable(None)  # OK
-x = Variable(1.0)  # NG
+    x = Variable(np.array(1.0))  # OK
+    x = Variable(None)  # OK
+    x = Variable(1.0)  # NG: 오류 발생!

@@ -13,8 +13,8 @@ class Variable:
     def backward(self):
         funcs = [self.creator]
         while funcs:
-            f = funcs.pop()  # 1. Get a function 
-            x, y = f.input, f.output  # 2. Get the function's input/output
+            f = funcs.pop()    # 1. Get a function 
+            x, y = f.input, f.output   # 2. Get the function's input/output
             x.grad = f.backward(y.grad)  # 3. Call the function's backward
 
             if x.creator is not None:
@@ -61,7 +61,6 @@ class Exp(Function):
 
 
 if __name__ == "__main__":     
-    
     
     A = Square()
     B = Exp()

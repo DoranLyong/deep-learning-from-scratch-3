@@ -11,11 +11,11 @@ class Variable:
         self.creator = func
 
     def backward(self):
-        f = self.creator   # 1. Get a function (creator를 가져온다)
+        f = self.creator     # 1. Get a function (creator를 가져온다)
         if f is not None:
-            x = f.input    # 2. Get the function's input (creator에서 input을 가져오고)
+            x = f.input     # 2. Get the function's input (creator에서 input을 가져오고)
             x.grad = f.backward(self.grad)  # 3. Call the function's backward (함수의 backward 메서드 호출)
-            x.backward()   # 4. (재귀) 하나 앞 변수의 backward 메서드를 호출한다 
+            x.backward()    # 4. (재귀) 하나 앞 변수의 backward 메서드를 호출한다 
 
 
 class Function:
