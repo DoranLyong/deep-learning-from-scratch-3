@@ -64,8 +64,9 @@ class Add(Function):
 def add(x0, x1):
     return Add()(x0, x1)
 
+if __name__ == "__main__":
 
-x0 = Variable(np.array(2))
-x1 = Variable(np.array(3))
-y = add(x0, x1)
-print(y.data)
+    x0 = Variable(np.array(2))
+    x1 = Variable(np.array(3))
+    y = add(x0, x1)
+    print(y.data)  # 5
